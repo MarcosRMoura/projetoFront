@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="ui-g">
+        
+        <div class="ui-g-12">
+            <h1>Consultar Patrocinadores</h1>
+        </div>
+
+        <div class="ui-g-6 ui-fluid">
+            <label style="display: block;">Razão Social</label>
+            <input type="text" pInputText name="razaoSocial" [(ngModel)]="razaoSocial" >
+        </div>
+
+        <div class="ui-g-6 ui-fluid">
+            <label style="display: block;">Nome Abreviado</label>
+            <input type="text" pInputText name="nomeAbreviado" [(ngModel)]="nomeAbreviado" >
+        </div>
+
+        <div class="ui-g-12">
+            <div class="buttons">
+                <button id="consultar" pButton type="submit" label="Consultar" (click)="pesquisar()" ></button>
+                <button id="limpar" pButton type="submit" label="Limpar" (click)="limpar()" ></button>
+                <a id="novo" pButton type="submit" label="Novo" routerLink="/patrocinadores/novo" ></a>
+            </div>
+        </div>
+
+        <div class="ui-g-12">
+            <p-table [value]="patrocinadores" [paginator]="true" [rows]="4" [responsive]="true" #tabela >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Razão Social</th>
+                        <th>Nome Abreviado</th>
+                        <th>Descontado Em Folha</th>
+                        <th class="col-acoes">Ações</th>
+                    </tr>
+                </ng-template> 
+                <ng-template pTemplate="body" let-patrocinador let-rowData>
+                    <tr>
+                        <td>{{ patrocinador.razaosocial }}</td>
+                        <td>{{ patrocinador.nomeabreviado }}</td>
+                        <td>{{ patrocinador.descontadoemfolha }}</td>
+                        <td class="col-acoes">
+                            <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/patrocinadores', rowData.codigo]" ></a>
+                            <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(rowData)" ></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    
+</div>

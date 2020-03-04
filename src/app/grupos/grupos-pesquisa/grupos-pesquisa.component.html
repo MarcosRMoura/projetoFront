@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="ui-g">
+
+        <div class="ui-g-12 ui-fluid">
+            <h1>Consultar Grupos</h1>
+        </div>
+
+        <div class="ui-g-6 ui-fluid">
+            <label>Plano</label>
+            <p-dropdown [options]="planosDropdow" name="plano" ngModel #plano="ngModel" required placeholder="Selecione" [(ngModel)]="planoPesquisa" ></p-dropdown>
+            
+            <app-message [control]="plano" error="required" text="Informe um nome"></app-message>
+
+        </div>
+
+        <div class="ui-g-6 ui-fluid">
+            <label>Grupo</label>
+            <p-dropdown [options]="gruposDropdow" name="grupo" ngModel #grupo="ngModel" required placeholder="Selecione" [(ngModel)]="grupoPesquisa"  ></p-dropdown>
+            
+            <app-message [control]="grupo" error="required" text="Informe um nome"></app-message>
+
+        </div>
+
+        <div class="ui-g-12">
+            <div class="buttons">
+                <button id="consultar" pButton type="submit" label="Consultar" (click)="pesquisar()"></button>
+                <button id="limpar" pButton type="submit" label="Limpar" (click)="limpar()" ></button>
+                <a id="novo" pButton type="submit" label="Novo" routerLink="/grupos/novo" ></a>
+            </div>
+        </div>
+
+
+        <div class="ui-g-12">
+            <p-table [value]="grupos" [paginator]="true" [rows]="4" [responsive]="true" #tabela >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Codigo do Plano</th>
+                        <th>Plano</th>
+                        <th>Situação</th>
+                        <th class="col-acoes">Ações</th>
+                    </tr>
+                </ng-template> 
+                <ng-template pTemplate="body" let-grupo let-rowData>
+                    <tr>
+                        <td>{{grupo.nome}}</td>
+                        <td>{{grupo.plano.codigo}}</td>
+                        <td>{{grupo.plano.nome}}</td>
+                        <td>{{grupo.ativo}}</td>
+                        <td class="col-acoes">
+                            <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" [routerLink]="['/grupos', rowData.codigo]" ></a>
+                            <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(rowData)" ></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+    </div>
+</div>

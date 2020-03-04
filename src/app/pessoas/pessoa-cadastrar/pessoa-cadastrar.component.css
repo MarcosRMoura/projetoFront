@@ -1,0 +1,11 @@
+label {
+    font-weight: bold;
+}
+
+button, a {
+    margin-right: 2px;
+}
+
+.buttons {
+    margin-left: 86%;
+}

@@ -1,0 +1,41 @@
+<div class="container">
+    <form #f="ngForm">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+                <h1>{{novoEditar ? 'Editar' : 'Novo'}} Pagamento</h1>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Cliente</label>
+                <p-dropdown [options]="pessoas" placeholder="Selecione" filter="true" name="pessoa" ngModel #pessoa="ngModel" required [(ngModel)]="pagamento.pessoa.codigo" >
+                    <ng-template let-pessoa pTemplate="item">
+                        <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                            <div style="font-size:14px;float:right;margin-top:4px">{{pessoa.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+
+                <app-message [control]="pessoa" error="required" text="Selecione um cliente"></app-message>
+
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Data do Pagamento</label>
+                <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="dataDoPagamento" ngModel #dataDoPagamento="ngModel" required [(ngModel)]="pagamento.dataPagamento" ></p-calendar>
+                
+                <app-message [control]="dataDoPagamento" error="required" text="Informe uma data"></app-message>
+
+            </div>
+
+            <div class="ui-g-12">
+                <div class="buttons">
+                    <button pButton type="button" label="Voltar" routerLink="/pagamentos" ></button>
+                    <button pButton type="submit" label="Salvar" [disabled]="f.invalid" (click)="salvar(f)" ></button>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>

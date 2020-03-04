@@ -1,0 +1,35 @@
+<div class="container">
+    <form #f="ngForm">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+                <h1>{{ novoEditar ? 'Editar' : 'Novo'}} Plano</h1>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Nome</label>
+                <input pInputText type="text" name="nome" ngModel #nome="ngModel" required minlength="5" [(ngModel)]="plano.nome" >
+        
+                <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
+                <app-message [control]="nome" error="minlength" text="Mínimo de 5 caracteres"></app-message>
+            
+            </div>
+            
+            <div class="ui-g-6 ui-fluid">
+                <label>Valor Mensal</label>
+                <input pInputText type="text" name="valorMensal" ngModel #valorMensal="ngModel" placeholder="0,00" required [(ngModel)]="plano.valormensal" >
+            
+                <app-message [control]="valorMensal" error="required" text="Informe um valor"></app-message>
+            
+            </div>
+
+            <div class="ui-g-12">
+                <div class="buttons">
+                    <a pButton type="button" label="Voltar" routerLink="/planos" ></a>
+                    <button pButton type="submit" label="Salvar" [disabled]="f.invalid" (click)="salvar(f)"></button>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</div>

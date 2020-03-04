@@ -1,0 +1,49 @@
+<div class="container">
+    <form #f="ngForm">
+        <div class="ui-g">
+
+            <div class="ui-g-12 ui-fluid">
+                <h1>{{novoEditar ? 'Editar' : 'Novo'}} Grupo</h1>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Nome</label>
+                <input pInputText type="text" name="nome" ngModel #nome="ngModel" required minlength="5" [(ngModel)]="grupo.nome" >
+            
+                <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
+                <app-message [control]="nome" error="minlength" text="Mínimo de 5 caracteres"></app-message>
+
+            </div>
+            
+            <div class="ui-g-6 ui-fluid">
+                <label>Plano</label>
+                <p-dropdown [options]="planos" name="plano" ngModel #plano="ngModel" required placeholder="Selecione" [(ngModel)]="grupo.plano.codigo" ></p-dropdown>
+                
+                <app-message [control]="plano" error="required" text="Informe um nome"></app-message>
+  
+            </div>
+        
+        
+            <div class="ui-g-12">
+                <div class="pickList">
+                    <p-pickList [source]="patrocinadores" [target]="patrocinadoresSelecionados" sourceHeader="Disponível" targetHeader="Selecionado" [responsive]="true" filterBy="razaoSocial" 
+                    dragdrop="true" sourceFilterPlaceholder="Filtro por Razão Social" targetFilterPlaceholder="Filtro por Razão Social" [sourceStyle]="{'height':'200px'}" [targetStyle]="{'height':'200px'}">
+                        <ng-template let-patrocinador pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <div style="font-size:14px; float:left;"> {{patrocinador.nomeabreviado}} - {{patrocinador.razaosocial}} </div>
+                            </div>
+                        </ng-template>
+                    </p-pickList>
+                </div>
+            </div>
+            
+            <div class="ui-g-12">
+                <div class="buttons">
+                    <button pButton type="button" label="Voltar" routerLink="/grupos" ></button>
+                    <button pButton type="submit" label="Salvar" [disabled]="f.invalid" (click)="salvar(f)" ></button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

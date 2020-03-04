@@ -1,0 +1,69 @@
+<div class="container">
+    <form #f="ngForm">
+        <div class="ui-g">
+
+            <div class="ui-g-12">
+                <div>
+                    <h1>{{novoEditar ? 'Editar' : 'Nova'}} Pessoa</h1>
+                </div>
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Nome</label>
+                <input pInputText type="text" name="nome" ngModel #nome="ngModel" required minlength="5" [(ngModel)]="pessoa.nome" >
+                
+                <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
+                <app-message [control]="nome" error="minlength" text="Mínimo de 5 caracteres"></app-message>
+
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Data de Nascimento</label>
+                <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="dataDeNascimento" ngModel #dataDeNascimento="ngModel" required [(ngModel)]="pessoa.dataNascimento" ></p-calendar>
+            
+                <app-message [control]="dataDeNascimento" error="required" text="Informe uma data"></app-message>
+
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>CPF</label>
+                <p-inputMask mask="999.999.999-99" placeholder="000.000.000-00" name="cpf" ngModel #cpf="ngModel" required [(ngModel)]="pessoa.cpf" ></p-inputMask>
+            
+                <app-message [control]="cpf" error="required" text="Informe um cpf"></app-message>
+
+            </div>
+            
+            <div class="ui-g-6 ui-fluid">
+                <label>Patrocinador</label>
+                <p-dropdown [options]="patrocinadores" placeholder="Selecione" name="patrocinador" ngModel #patrocinador="ngModel" required [(ngModel)]="pessoa.cliente.patrocinador.codigo" ></p-dropdown>
+            
+                <app-message [control]="patrocinador" error="required" text="Informe um patrocinador"></app-message>
+            
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Grupo</label>
+                <p-dropdown [options]="grupos" placeholder="Selecione" name="grupo" ngModel #grupo="ngModel" required [(ngModel)]="pessoa.cliente.grupo.codigo" ></p-dropdown>
+            
+                <app-message [control]="grupo" error="required" text="Informe um grupo"></app-message>
+            
+            </div>
+
+            <div class="ui-g-6 ui-fluid">
+                <label>Data de Aquisicao</label>
+                <p-calendar dateFormat="dd/mm/yy" [showIcon]="true" name="dataDeAquisicao" ngModel #dataDeAquisicao="ngModel" required [(ngModel)]="pessoa.cliente.dataAquisicao" ></p-calendar>
+            
+                <app-message [control]="dataDeAquisicao" error="required" text="Informe uma data"></app-message>
+
+            </div>
+
+            <div class="ui-g-12">
+                <div class="buttons">
+                    <button pButton type="button" label="Voltar" routerLink="/pessoas" ></button>
+                    <button pButton type="submit" label="Salvar" [disabled]="f.invalid" (click)="salvar(f)" ></button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
